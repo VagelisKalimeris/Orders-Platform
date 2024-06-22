@@ -1,7 +1,7 @@
 services:
   orders-api-container:
     build:
-      context: ./orders
+      context: order
     ports:
       - '80:80'
 

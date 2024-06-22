@@ -5,7 +5,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
-from orders.routers import order_router
+from order.routers import order_router
 
 
 def customize_openapi_schema():

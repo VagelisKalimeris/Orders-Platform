@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, HTTPException, WebSocket
 
-from orders.models.router_model import OrderInput, OrderOutput, Status
+from order.models.router_model import OrderInput, OrderOutput, Status
 
 router = APIRouter()
 
