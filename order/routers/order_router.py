@@ -37,7 +37,7 @@ def place_a_new_order(order_info: OrderInput) -> OrderOutput:
         id=new_order_id,
         stoks=order_info.stoks,
         quantity=order_info.quantity,
-        status=Status.pending
+        status=Status.executed
     )
 
 
