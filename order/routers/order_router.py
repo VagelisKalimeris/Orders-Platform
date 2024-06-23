@@ -2,20 +2,19 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from order.models.router_model import OrderInput, OrderOutput, Status
+from order.repositories.in_memory_repository.in_memory_db import InMemDB
 from order.services.order_service import Order
 
+
 router = APIRouter()
-
-
-
-order_example = OrderOutput(id='33', stoks='fff', quantity=50, status=Status.pending)
+repository = InMemDB()
 
 
 @router.get('/orders', status_code=200)
 async def retrieve_all_orders() -> List[OrderOutput]:
     """
     """
-    orders_info = Order.get_all_orders()
+    orders_info = Order(repository).get_all_orders()
 
     return [
         OrderOutput(
@@ -31,7 +30,7 @@ async def retrieve_all_orders() -> List[OrderOutput]:
 def place_a_new_order(order_info: OrderInput) -> OrderOutput:
     """
     """
-    new_order_id = Order.post_new_order(order_info.stoks, order_info.quantity)
+    new_order_id = Order(repository).post_new_order(order_info.stoks, order_info.quantity)
 
     return OrderOutput(
         id=new_order_id,
@@ -45,7 +44,7 @@ def place_a_new_order(order_info: OrderInput) -> OrderOutput:
 def retrieve_a_specific_order(order_id: str) -> OrderOutput:
     """
     """
-    if not (order_info := Order.get_specific_order(order_id)):
+    if not (order_info := Order(repository).get_specific_order(order_id)):
         raise HTTPException(status_code=404, detail='Order not found!')
 
     return OrderOutput(
@@ -60,7 +59,7 @@ def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 def cancel_an_order(order_id: str) -> None:
     """
     """
-    Order.delete_existing_order(order_id)
+    Order(repository).delete_existing_order(order_id)
 
 
 @router.websocket('/ws')
