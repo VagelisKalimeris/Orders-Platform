@@ -8,4 +8,8 @@ sample_orders = [
 ]
 
 
+"""To be populated by tests"""
 sample_order_ids = []
+
+
+orders_to_delete = [1, 3]

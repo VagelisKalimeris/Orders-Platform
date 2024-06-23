@@ -18,11 +18,11 @@ class OrdersTestClient:
     @staticmethod
     def _verify_status_and_description(response: Response, status_code: int, description: str):
         # Verify expected status code
-        assert_that(response, readable_json(response.json())).has_status_code(status_code)
+        assert_that(response).has_status_code(status_code)
 
         # Verify description, ONLY FOR FAILED CALLS
         if description:
-            assert_that(response, readable_json(response.json())).has_description(description)
+            assert_that(response).has_description(description)
 
     def get(self, path: str, status_code: int = 200, description: str = None) -> dict:
         # Do call
