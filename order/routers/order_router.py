@@ -60,7 +60,7 @@ def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 def cancel_an_order(order_id: str) -> None:
     """
     """
-    Order(repository).delete_existing_order(order_id)
+    Order(repository).cancel_existing_order(order_id)
 
 
 @router.websocket('/ws')

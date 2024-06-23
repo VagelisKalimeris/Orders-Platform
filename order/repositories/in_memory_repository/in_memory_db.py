@@ -37,9 +37,6 @@ class InMemDB:
 
         return new_uuid
 
-    def remove_db_entry(self, order_id: str):
-        del self.db[order_id]
-
     def update_db_entry_status(self, order_id: str, new_status: Status):
-        if entry := self.db.get(self.db[order_id]):
+        if entry := self.db.get(order_id):
             entry.status = new_status
