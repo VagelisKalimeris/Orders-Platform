@@ -1,3 +1,5 @@
+from json import dumps
+
 from httpx import get, post, delete, Response
 from assertpy import assert_that
 
@@ -34,7 +36,7 @@ class OrdersTestClient:
 
     def post(self, path: str, body, status_code: int = 201, description: str = None) -> dict:
         # Do call
-        post_resp = post(self.service_base_url + path, data=body)
+        post_resp = post(self.service_base_url + path, data=dumps(body))
 
         # Verify expected status code & description
         self._verify_status_and_description(post_resp, status_code, description)
