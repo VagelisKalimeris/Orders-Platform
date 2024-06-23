@@ -6,8 +6,9 @@ from test.nano_test_framework.response_util import readable_json
 
 class TestClient:
     """
-    Test client base class.
+    Test client provides wrappers for required CRUD ops.
     Abstracts repetitive boilerplate code form tests.
+    Can be used as base class for each service's custom extensions.
     """
     def __init__(self):
         self.service_base_url = None
