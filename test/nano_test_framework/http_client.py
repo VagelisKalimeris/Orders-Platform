@@ -4,14 +4,14 @@ from assertpy import assert_that
 from test.nano_test_framework.response_util import readable_json
 
 
-class TestClient:
+class OrdersTestClient:
     """
     Test client provides wrappers for required CRUD ops.
     Abstracts repetitive boilerplate code form tests.
-    Can be used as base class for each service's custom extensions.
     """
     def __init__(self):
-        self.service_base_url = None
+        # todo: Move to config
+        self.service_base_url = 'http://orders-api-container:80'
 
     @staticmethod
     def _verify_status_and_description(response: Response, status_code: int, description: str):
