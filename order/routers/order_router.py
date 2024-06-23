@@ -26,6 +26,7 @@ async def retrieve_all_orders() -> List[OrderOutput]:
         for key, val in orders_info.items()
     ]
 
+
 @router.post('/orders', status_code=201)
 def place_a_new_order(order_info: OrderInput) -> OrderOutput:
     """
