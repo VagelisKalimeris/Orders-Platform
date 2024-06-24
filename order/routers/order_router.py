@@ -60,11 +60,8 @@ async def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 async def cancel_an_order(order_id: str) -> None:
     """
     """
-    if not await Order(repository).get_specific_order(order_id):
-        # todo: Possible race condition
+    if not await Order(repository).cancel_existing_order(order_id):
         raise HTTPException(status_code=404, detail='Order not found!')
-
-    await Order(repository).cancel_existing_order(order_id)
 
 
 @router.websocket('/ws')

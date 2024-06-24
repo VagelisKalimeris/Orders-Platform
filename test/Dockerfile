@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir --upgrade -r /Test-Orders/test/requirements.txt
 COPY . /Test-Orders/test
 
 
-# Run tests after server is up and stay alive for debugging or reruns
-CMD ["/bin/bash","-c","sleep 5; pytest -vs --html=/test/test_reports/report.htm; tail -f /dev/null"]
+# Run tests and stay alive for debugging or reruns
+CMD ["/bin/bash","-c","sleep 3; pytest -vs --html=/test/test_reports/report.htm; tail -f /dev/null"]

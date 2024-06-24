@@ -31,4 +31,4 @@ class Order:
     async def cancel_existing_order(self, order_id: str):
         Order.gen_rand_delay()
 
-        await self.repository.update_db_entry_status(order_id, Status.canceled)
+        return await self.repository.update_db_entry_status(order_id, Status.canceled)

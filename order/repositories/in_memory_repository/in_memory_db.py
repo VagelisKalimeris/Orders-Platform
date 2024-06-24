@@ -50,3 +50,4 @@ class InMemDB:
         async with self.db_lock:
             if entry := self.db.get(order_id):
                 entry.status = new_status
+                return True
