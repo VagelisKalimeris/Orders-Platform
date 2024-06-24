@@ -10,7 +10,8 @@ class Order:
 
     @staticmethod
     def gen_rand_delay():
-        return randrange(10) * .1
+        delay = randrange(10) * .1
+        sleep(delay)
 
     def get_all_orders(self):
         return self.repository.get_all_db_entries()
@@ -18,8 +19,7 @@ class Order:
     def post_new_order(self, stoks: str, quantity: float):
         new_order_id = self.repository.add_db_entry(stoks, quantity)
 
-        delay = Order.gen_rand_delay()
-        sleep(delay)
+        Order.gen_rand_delay()
 
         self.repository.update_db_entry_status(new_order_id, Status.executed)
 
@@ -29,7 +29,6 @@ class Order:
         return self.repository.get_specific_db_entry(order_id)
 
     def cancel_existing_order(self, order_id: str):
-        delay = Order.gen_rand_delay()
-        sleep(delay)
+        Order.gen_rand_delay()
 
         self.repository.update_db_entry_status(order_id, Status.canceled)
