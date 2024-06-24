@@ -13,22 +13,22 @@ class Order:
         delay = randrange(10) * .1
         sleep(delay)
 
-    def get_all_orders(self):
-        return self.repository.get_all_db_entries()
+    async def get_all_orders(self):
+        return await self.repository.get_all_db_entries()
 
-    def post_new_order(self, stoks: str, quantity: float):
-        new_order_id = self.repository.add_db_entry(stoks, quantity)
+    async def post_new_order(self, stoks: str, quantity: float):
+        new_order_id = await self.repository.add_db_entry(stoks, quantity)
 
         Order.gen_rand_delay()
 
-        self.repository.update_db_entry_status(new_order_id, Status.executed)
+        await self.repository.update_db_entry_status(new_order_id, Status.executed)
 
         return new_order_id
 
-    def get_specific_order(self, order_id: str):
-        return self.repository.get_specific_db_entry(order_id)
+    async def get_specific_order(self, order_id: str):
+        return await self.repository.get_specific_db_entry(order_id)
 
-    def cancel_existing_order(self, order_id: str):
+    async def cancel_existing_order(self, order_id: str):
         Order.gen_rand_delay()
 
-        self.repository.update_db_entry_status(order_id, Status.canceled)
+        await self.repository.update_db_entry_status(order_id, Status.canceled)

@@ -14,7 +14,7 @@ repository = InMemDB()
 async def retrieve_all_orders() -> List[OrderOutput]:
     """
     """
-    orders_info = Order(repository).get_all_orders()
+    orders_info = await Order(repository).get_all_orders()
 
     return [
         OrderOutput(
@@ -28,10 +28,10 @@ async def retrieve_all_orders() -> List[OrderOutput]:
 
 
 @router.post('/orders', status_code=201)
-def place_a_new_order(order_info: OrderInput) -> OrderOutput:
+async def place_a_new_order(order_info: OrderInput) -> OrderOutput:
     """
     """
-    new_order_id = Order(repository).post_new_order(order_info.stoks, order_info.quantity)
+    new_order_id = await Order(repository).post_new_order(order_info.stoks, order_info.quantity)
 
     return OrderOutput(
         id=new_order_id,
@@ -42,10 +42,10 @@ def place_a_new_order(order_info: OrderInput) -> OrderOutput:
 
 
 @router.get('/orders/{order_id}', status_code=200)
-def retrieve_a_specific_order(order_id: str) -> OrderOutput:
+async def retrieve_a_specific_order(order_id: str) -> OrderOutput:
     """
     """
-    if not (order_info := Order(repository).get_specific_order(order_id)):
+    if not (order_info := await Order(repository).get_specific_order(order_id)):
         raise HTTPException(status_code=404, detail='Order not found!')
 
     return OrderOutput(
@@ -57,18 +57,18 @@ def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 
 
 @router.delete('/orders/{order_id}', status_code=204)
-def cancel_an_order(order_id: str) -> None:
+async def cancel_an_order(order_id: str) -> None:
     """
     """
-    if not Order(repository).get_specific_order(order_id):
+    if not await Order(repository).get_specific_order(order_id):
         # todo: Possible race condition
         raise HTTPException(status_code=404, detail='Order not found!')
 
-    Order(repository).cancel_existing_order(order_id)
+    await Order(repository).cancel_existing_order(order_id)
 
 
 @router.websocket('/ws')
-def web_socket_connection_for_real_time_order_information() -> None:
+async def web_socket_connection_for_real_time_order_information() -> None:
     """
     """
     pass
