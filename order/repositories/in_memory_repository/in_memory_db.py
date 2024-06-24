@@ -7,20 +7,32 @@ from order.models.router_model import Status
 
 
 class InMemDB:
-    # Class variables
+    """
+    Class variables
+    """
     db = {}
     db_lock = Lock()
 
-    # def __init__(self):
-    #     self.db = InMemDB.db
+    def __init__(self):
+        """
+        Instances use global db class variables.
+        """
+        self.db = InMemDB.db
+        self.db_lock = InMemDB.db_lock
 
     class Entry(BaseModel):
+        """
+        Constrains db entries to valid options.
+        """
         stoks: str
         quantity: float
         status: Status
 
     def generate_unique_uuid(self):
-        # Produce unique order id
+        """
+        Does not lock db!
+        Locking is caller's responsibility.
+        """
         while True:
             new_uuid = str(uuid.uuid4())
             if not self.db.get(new_uuid):

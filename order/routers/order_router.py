@@ -62,10 +62,3 @@ async def cancel_an_order(order_id: str) -> None:
     """
     if not await Order(repository).cancel_existing_order(order_id):
         raise HTTPException(status_code=404, detail='Order not found!')
-
-
-@router.websocket('/ws')
-async def web_socket_connection_for_real_time_order_information() -> None:
-    """
-    """
-    pass
