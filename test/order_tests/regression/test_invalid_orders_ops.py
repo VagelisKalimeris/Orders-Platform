@@ -21,6 +21,7 @@ class TestInvalidOrdersOps:
         param({'stoks': 'GBPUSD'}, id='Attribute quantity missing'),
         param({'stoks': 'GBPUSD', 'quantity': None}, id='Attribute quantity empty'),
         param({'stoks': 'GBPUSD', 'quantiti': 33.5}, id='Attribute quantity invalid name'),
+        param({'stoks': 'GBPUSD', 'quantity': "fifty"}, id='Attribute quantity invalid type'),
         # Both
         param({}, id='Request body empty')
     ])
