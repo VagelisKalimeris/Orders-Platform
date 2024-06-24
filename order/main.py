@@ -5,7 +5,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
-from order.routers import order_router
+from order.routers import order_router, websocket_router
 
 
 def customize_openapi_schema():
@@ -31,8 +31,9 @@ def customize_openapi_schema():
 # Start API
 app = FastAPI()
 
-# Enable routes
+# Enable routers
 app.include_router(order_router.router)
+app.include_router(websocket_router.router)
 
 
 # Customize SWAGGER
