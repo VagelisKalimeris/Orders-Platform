@@ -28,7 +28,7 @@ class InMemDB:
         quantity: float
         status: Status
 
-    def generate_unique_uuid(self):
+    def generate_unique_uuid(self) -> uuid:
         """
         Does not lock db!
         Locking is caller's responsibility.
@@ -38,11 +38,11 @@ class InMemDB:
             if not self.db.get(new_uuid):
                 return new_uuid
 
-    async def get_all_db_entries(self):
+    async def get_all_db_entries(self) -> dict:
         async with self.db_lock:
             return self.db
 
-    async def get_specific_db_entry(self, order_id: str):
+    async def get_specific_db_entry(self, order_id: str) -> Entry:
         async with self.db_lock:
             return self.db.get(order_id)
 
@@ -58,7 +58,7 @@ class InMemDB:
 
         return new_uuid
 
-    async def update_db_entry_status(self, order_id: str, new_status: Status):
+    async def update_db_entry_status(self, order_id: str, new_status: Status) -> bool | None:
         async with self.db_lock:
             if entry := self.db.get(order_id):
                 entry.status = new_status

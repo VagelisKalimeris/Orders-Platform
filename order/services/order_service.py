@@ -1,3 +1,4 @@
+import uuid
 from random import randrange
 from time import sleep
 
@@ -9,14 +10,14 @@ class Order:
         self.repository = repository
 
     @staticmethod
-    def gen_rand_delay():
+    def gen_rand_delay() -> None:
         delay = randrange(10) * .1
         sleep(delay)
 
-    async def get_all_orders(self):
+    async def get_all_orders(self) -> dict:
         return await self.repository.get_all_db_entries()
 
-    async def post_new_order(self, stoks: str, quantity: float):
+    async def post_new_order(self, stoks: str, quantity: float) -> uuid:
         new_order_id = await self.repository.add_db_entry(stoks, quantity)
 
         Order.gen_rand_delay()
@@ -25,7 +26,7 @@ class Order:
 
         return new_order_id
 
-    async def get_specific_order(self, order_id: str):
+    async def get_specific_order(self, order_id: str) -> Status:
         return await self.repository.get_specific_db_entry(order_id)
 
     async def cancel_existing_order(self, order_id: str):
