@@ -37,7 +37,7 @@ def place_a_new_order(order_info: OrderInput) -> OrderOutput:
         id=new_order_id,
         stoks=order_info.stoks,
         quantity=order_info.quantity,
-        status=Status.pending
+        status=Status.executed
     )
 
 
@@ -60,6 +60,10 @@ def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 def cancel_an_order(order_id: str) -> None:
     """
     """
+    if not Order(repository).get_specific_order(order_id):
+        # todo: Possible race condition
+        raise HTTPException(status_code=404, detail='Order not found!')
+
     Order(repository).cancel_existing_order(order_id)
 
 

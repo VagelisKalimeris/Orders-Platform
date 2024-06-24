@@ -8,4 +8,4 @@ services:
 
   orders-tests-container:
     build:
-      context: ./test
+      context: test

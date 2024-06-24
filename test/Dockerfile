@@ -2,16 +2,18 @@
 FROM python:3.11
 
 # Create dir
-WORKDIR /test-orders
+WORKDIR /Test-Orders
 
 # Install dependencies
-COPY requirements.txt /test-orders/test/requirements.txt
+COPY requirements.txt /Test-Orders/test/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /test-orders/test/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /Test-Orders/test/requirements.txt
 
 # Copy necessary files
-COPY . /test-orders/test
+COPY . /Test-Orders/test
 
 
 # Run tests
-CMD ["/bin/bash","-c","pytest -v"]
+#CMD ["/bin/bash","-c","pytest -vs"]
+
+CMD ["/bin/bash","-c","tail -f /dev/null"]
