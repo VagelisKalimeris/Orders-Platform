@@ -9,3 +9,7 @@ services:
   orders-tests-container:
     build:
       context: test
+    volumes:
+      - ./test/test_reports:/test/test_reports
+    depends_on:
+      - orders-api-container
