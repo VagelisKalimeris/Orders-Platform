@@ -13,9 +13,9 @@ async def web_socket_connection_for_real_time_order_information(websocket: WebSo
     Working experiment.
     """
     await websocket.accept()
+
+    await Order(repository).add_subscribed_websocket_client(websocket)
+
     while True:
-        order_id = await websocket.receive_text()
-        if order := await Order(repository).get_specific_order(order_id):
-            await websocket.send_text(order.status.value)
-        else:
-            await websocket.send_text('Invalid order id!')
+        await websocket.receive_text()
+
