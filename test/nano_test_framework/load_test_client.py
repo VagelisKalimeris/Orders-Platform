@@ -27,7 +27,7 @@ class LoadTestClient(OrdersTestClient):
 
         # Start user threads
         for _ in range(users):
-            thread =  Thread(target=self.calculate_get_resp_time(path, response_times, lock))
+            thread = Thread(target=self.calculate_get_resp_time(path, response_times, lock))
             threads.append(thread)
             thread.start()
 
