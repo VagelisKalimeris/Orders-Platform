@@ -1,3 +1,6 @@
+import asyncio
+import concurrent.futures
+import threading
 import uuid
 from random import randrange
 from time import sleep
@@ -10,32 +13,37 @@ class Order:
         self.repository = repository
 
     @staticmethod
-    def gen_rand_delay() -> None:
+    async def gen_rand_delay() -> None:
         delay = randrange(10) * .1
-        sleep(delay)
+        await asyncio.sleep(delay)
+
+    async def update_status_in_background(self, order_id: str) -> None:
+        await Order.gen_rand_delay()
+
+        await self.repository.update_db_entry_status(order_id, Status.executed)
+
 
     async def get_all_orders(self) -> dict:
-        Order.gen_rand_delay()
+        await Order.gen_rand_delay()
 
         return await self.repository.get_all_db_entries()
 
     async def post_new_order(self, stoks: str, quantity: float) -> uuid:
-        Order.gen_rand_delay()
+        await Order.gen_rand_delay()
 
         new_order_id = await self.repository.add_db_entry(stoks, quantity)
 
-        Order.gen_rand_delay()
-
-        await self.repository.update_db_entry_status(new_order_id, Status.executed)
+        # This task will run in background and will not block POST
+        asyncio.create_task(self.update_status_in_background(new_order_id))
 
         return new_order_id
 
     async def get_specific_order(self, order_id: str) -> Status:
-        Order.gen_rand_delay()
+        await Order.gen_rand_delay()
 
         return await self.repository.get_specific_db_entry(order_id)
 
     async def cancel_existing_order(self, order_id: str):
-        Order.gen_rand_delay()
+        await Order.gen_rand_delay()
 
         return await self.repository.update_db_entry_status(order_id, Status.canceled)

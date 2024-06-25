@@ -34,13 +34,13 @@ async def place_a_new_order(order_info: OrderInput) -> OrderOutput:
     Registers a new order with given details in db.
     Responds with new order uuid.
     """
-    new_order_id = await Order(repository).post_new_order(order_info.stoks, order_info.quantity)
+    new_order_id = await (Order(repository).post_new_order(order_info.stoks, order_info.quantity))
 
     return OrderOutput(
         id=new_order_id,
         stoks=order_info.stoks,
         quantity=order_info.quantity,
-        status=Status.executed
+        status=Status.pending
     )
 
 
