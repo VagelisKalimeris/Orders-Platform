@@ -57,3 +57,11 @@ class TestOrdersOps:
 
         assert_that(get_resp, readable_json(get_resp)) \
             .has_status(OrderStatus.canceled.value)
+
+    def test_retrieve_all_cancelled_orders(self, orders_test_client):
+        # Make api call, verify status
+        get_resp = orders_test_client.get('/orders?status=canceled')
+
+        assert_that(get_resp, readable_json(get_resp)) \
+            .extracting('id') \
+            .is_equal_to([sample_order_ids[pos] for pos in orders_to_delete])
