@@ -1,4 +1,4 @@
-import uuid
+from uuid import uuid4
 from asyncio import Lock
 
 from pydantic import BaseModel
@@ -28,13 +28,13 @@ class InMemDB:
         quantity: float
         status: Status
 
-    def generate_unique_uuid(self) -> uuid:
+    def generate_unique_uuid(self) -> uuid4:
         """
         Does not lock db!
         Locking is caller's responsibility.
         """
         while True:
-            new_uuid = str(uuid.uuid4())
+            new_uuid = str(uuid4())
             if not self.db.get(new_uuid):
                 return new_uuid
 
