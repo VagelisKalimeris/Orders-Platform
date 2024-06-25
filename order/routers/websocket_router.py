@@ -10,9 +10,8 @@ repository = InMemDB()
 @router.websocket('/ws')
 async def web_socket_connection_for_real_time_order_information(websocket: WebSocket) -> None:
     """
+    Working experiment.
     """
-    # await WS(websocket).status()
-
     await websocket.accept()
     while True:
         order_id = await websocket.receive_text()
