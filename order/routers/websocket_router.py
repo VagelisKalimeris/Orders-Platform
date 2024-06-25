@@ -18,4 +18,3 @@ async def web_socket_connection_for_real_time_order_information(websocket: WebSo
 
     while True:
         await websocket.receive_text()
-
