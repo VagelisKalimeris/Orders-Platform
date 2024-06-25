@@ -18,7 +18,7 @@ In essence, each worker handles a suite:
 - load testing  
 
 This affects load testing, since other concurrent tests slow down server, and can be avoided by setting 
-`-n=3` to `-n=0` in test [dockerfile][test dockerfile].
+`-n=3` to `-n=1` in test [dockerfile][test dockerfile].
 
 
 [instructions]: instructions.md
