@@ -15,9 +15,13 @@ class Order:
         sleep(delay)
 
     async def get_all_orders(self) -> dict:
+        Order.gen_rand_delay()
+
         return await self.repository.get_all_db_entries()
 
     async def post_new_order(self, stoks: str, quantity: float) -> uuid:
+        Order.gen_rand_delay()
+
         new_order_id = await self.repository.add_db_entry(stoks, quantity)
 
         Order.gen_rand_delay()
@@ -27,6 +31,8 @@ class Order:
         return new_order_id
 
     async def get_specific_order(self, order_id: str) -> Status:
+        Order.gen_rand_delay()
+
         return await self.repository.get_specific_db_entry(order_id)
 
     async def cancel_existing_order(self, order_id: str):
