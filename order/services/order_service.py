@@ -1,9 +1,6 @@
 import asyncio
-import concurrent.futures
-import threading
 import uuid
 from random import randrange
-from time import sleep
 
 from order.models.router_model import Status
 
@@ -21,7 +18,6 @@ class Order:
         await Order.gen_rand_delay()
 
         await self.repository.update_db_entry_status(order_id, Status.executed)
-
 
     async def get_all_orders(self) -> dict:
         await Order.gen_rand_delay()
