@@ -3,6 +3,8 @@ from json import dumps
 from httpx import get, post, delete, Response
 from assertpy import assert_that
 
+from test.config import SERVICE_BASE_URL
+
 
 class OrdersTestClient:
     """
@@ -10,8 +12,7 @@ class OrdersTestClient:
     Abstracts repetitive boilerplate code form tests.
     """
     def __init__(self):
-        # todo: Move to config
-        self.service_base_url = 'http://orders-api-container:80'
+        self.service_base_url = SERVICE_BASE_URL
 
     @staticmethod
     def _verify_status_and_detail(response: Response, status_code: int, detail: str):
