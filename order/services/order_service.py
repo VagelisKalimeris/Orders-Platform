@@ -17,6 +17,9 @@ class Order:
     async def add_subscribed_websocket_client(self, ws: WebSocket):
         self.subscribed_clients.append(ws)
 
+    async def remove_subscribed_websocket_client(self, ws: WebSocket):
+        self.subscribed_clients.remove(ws)
+
     @staticmethod
     async def gen_rand_delay() -> None:
         delay = randrange(10) * .1
@@ -27,6 +30,7 @@ class Order:
 
         await self.repository.update_db_entry_status(order_id, Status.executed)
 
+        # Message subscribed websocket clients
         for client_ws in self.subscribed_clients:
             await client_ws.send_text(f'Order {order_id} status is now {Status.executed.value}')
 
@@ -54,6 +58,7 @@ class Order:
         await Order.gen_rand_delay()
 
         if update_res := await self.repository.update_db_entry_status(order_id, Status.canceled):
+            # Message subscribed websocket clients
             for client_ws in self.subscribed_clients:
                 await client_ws.send_text(f'Order {order_id} status is now {Status.canceled.value}')
 

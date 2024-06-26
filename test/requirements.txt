@@ -3,5 +3,6 @@ assertpy~=1.1
 pytest~=8.2.1
 python-dotenv~=1.0.1
 flake8>=0
-pytest-html
-pytest-xdist
+pytest-html>=0
+pytest-xdist>=0
+httpx_ws>=0
