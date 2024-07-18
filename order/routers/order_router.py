@@ -24,7 +24,7 @@ async def retrieve_all_orders(status: Status = None) -> List[OrderOutput]:
             quantity=val.quantity,
             status=val.status
         )
-        for key, val in orders_info.items() if status is None or val.status == status
+        for key, val in orders_info.items() if status is None or val.status.value == status.value
     ]
 
 
