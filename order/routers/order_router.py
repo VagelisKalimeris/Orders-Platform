@@ -11,7 +11,7 @@ repository = InMemDB()
 
 
 @router.get('/orders', status_code=200)
-async def retrieve_all_orders() -> List[OrderOutput]:
+async def retrieve_all_orders(status: Status = None) -> List[OrderOutput]:
     """
     Responds with all existing db orders.
     """
@@ -24,7 +24,7 @@ async def retrieve_all_orders() -> List[OrderOutput]:
             quantity=val.quantity,
             status=val.status
         )
-        for key, val in orders_info.items()
+        for key, val in orders_info.items() if status is None or val.status.value == status.value
     ]
 
 
