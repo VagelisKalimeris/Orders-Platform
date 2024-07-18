@@ -1,6 +1,11 @@
 ## Objective
 See instructions [here][instructions].
 
+
+## Swagger
+Run server and visit [this page][swagger].
+
+
 ## Execution
 Running `docker-compose up` will:
 - Create api server container
@@ -8,6 +13,7 @@ Running `docker-compose up` will:
 - Execute all tests in test container
 - Produce test report [here][test report]
 - Keep both containers running for any debugging or re-running of tests
+
 
 ## Design
 Tests are executed in parallel, split in 3 workers, according to file.
@@ -18,9 +24,10 @@ In essence, each worker handles a suite:
 - load testing  
 
 This affects load testing, since other concurrent tests slow down server, and can be avoided by setting 
-`-n=3` to `-n=0` in test [dockerfile][test dockerfile].
+`-n=3` to `-n=1` in test [dockerfile][test dockerfile].
 
 
 [instructions]: instructions.md
+[swagger]: http://0.0.0.0:80/docs
 [test report]: test/test_reports/report.htm
 [test dockerfile]: test/Dockerfile

@@ -22,7 +22,7 @@ class TestOrdersOps:
         new_order_id = assert_that(post_resp, readable_json(post_resp)) \
             .has_stoks(order.stoks) \
             .has_quantity(order.quantity) \
-            .has_status(OrderStatus.executed.value) \
+            .has_status(OrderStatus.pending.value) \
             .extract_key('id') \
             .val
 
