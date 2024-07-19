@@ -20,7 +20,7 @@ async def retrieve_all_orders(status: Status = None) -> List[OrderOutput]:
     return [
         OrderOutput(
             id=key,
-            stoks=val.stoks,
+            item=val.item,
             quantity=val.quantity,
             status=val.status
         )
@@ -34,11 +34,11 @@ async def place_a_new_order(order_info: OrderInput) -> OrderOutput:
     Registers a new order with given details in db.
     Responds with new order uuid.
     """
-    new_order_id = await Order(repository).post_new_order(order_info.stoks, order_info.quantity)
+    new_order_id = await Order(repository).post_new_order(order_info.item, order_info.quantity)
 
     return OrderOutput(
         id=new_order_id,
-        stoks=order_info.stoks,
+        item=order_info.item,
         quantity=order_info.quantity,
         status=Status.pending
     )
@@ -55,7 +55,7 @@ async def retrieve_a_specific_order(order_id: str) -> OrderOutput:
 
     return OrderOutput(
         id=order_id,
-        stoks=order_info.stoks,
+        item=order_info.item,
         quantity=order_info.quantity,
         status=order_info.status
     )

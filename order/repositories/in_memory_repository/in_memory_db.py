@@ -24,8 +24,8 @@ class InMemDB:
         """
         Constrains db entries to valid options.
         """
-        stoks: str
-        quantity: float
+        item: str
+        quantity: int
         status: Status
 
     def generate_unique_uuid(self) -> uuid4:
@@ -46,12 +46,12 @@ class InMemDB:
         async with self.db_lock:
             return self.db.get(order_id)
 
-    async def add_db_entry(self, stoks: str, quantity: float) -> str:
+    async def add_db_entry(self, item: str, quantity: int) -> str:
         async with self.db_lock:
             new_uuid = self.generate_unique_uuid()
 
             self.db[new_uuid] = self.Entry(
-                stoks=stoks,
+                item=item,
                 quantity=quantity,
                 status=Status.pending
             )
