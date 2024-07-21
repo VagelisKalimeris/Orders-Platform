@@ -18,25 +18,17 @@ jobs:
       with:
         path: /tmp/.buildx-cache
         key: ${{ runner.os }}-buildx-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-buildx-
+        restore-keys: ${{ runner.os }}-buildx-
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
 
     - name: Build Docker Compose services
-      run: |
-        docker-compose -f docker-compose.yml build
-
-#    - name: Run Docker Compose services
-#      run: |
-#        docker-compose -f docker-compose.yml up -d
+      run: docker-compose build
 
     - name: Run tests
-      run: |
-        docker-compose -f docker-compose.yml run --rm orders-tests-container
+      run: docker-compose run --rm orders-tests-container
 
     - name: Shut down Docker Compose
       if: always()
-      run: |
-        docker-compose -f docker-compose.yml down
+      run: docker-compose down
