@@ -14,14 +14,14 @@ class TestInvalidOrdersOps:
 
     @mark.parametrize('invalid_order', [
         # Stoks
-        param({'quantity': 33.5}, id='Attribute stoks missing'),
-        param({'stoks': None, 'quantity': 33.5}, id='Attribute stoks empty'),
-        param({'stiks': 'GBPUSD', 'quantity': 33.5}, id='Attribute stoks invalid name'),
+        param({'quantity': 33}, id='Attribute "item" missing'),
+        param({'item': None, 'quantity': 33}, id='Attribute item empty'),
+        param({'itim': 'banana', 'quantity': 33}, id='Attribute item invalid name'),
         # Quantity
-        param({'stoks': 'GBPUSD'}, id='Attribute quantity missing'),
-        param({'stoks': 'GBPUSD', 'quantity': None}, id='Attribute quantity empty'),
-        param({'stoks': 'GBPUSD', 'quantiti': 33.5}, id='Attribute quantity invalid name'),
-        param({'stoks': 'GBPUSD', 'quantity': "fifty"}, id='Attribute quantity invalid type'),
+        param({'item': 'banana'}, id='Attribute quantity missing'),
+        param({'item': 'banana', 'quantity': None}, id='Attribute quantity empty'),
+        param({'item': 'banana', 'quantiti': 33}, id='Attribute quantity invalid name'),
+        param({'item': 'banana', 'quantity': "fifty"}, id='Attribute quantity invalid type'),
         # Both
         param({}, id='Request body empty')
     ])

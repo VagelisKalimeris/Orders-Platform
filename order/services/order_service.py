@@ -39,10 +39,10 @@ class Order:
 
         return await self.repository.get_all_db_entries()
 
-    async def post_new_order(self, stoks: str, quantity: float) -> uuid4:
+    async def post_new_order(self, item: str, quantity: int) -> uuid4:
         await Order.gen_rand_delay()
 
-        new_order_id = await self.repository.add_db_entry(stoks, quantity)
+        new_order_id = await self.repository.add_db_entry(item, quantity)
 
         # This task will run in background and will not block POST
         create_task(self.update_status_in_background(new_order_id))
