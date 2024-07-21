@@ -28,9 +28,13 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml build
 
-    - name: Run Docker Compose services
+#    - name: Run Docker Compose services
+#      run: |
+#        docker-compose -f docker-compose.yml up -d
+
+    - name: Run tests
       run: |
-        docker-compose -f docker-compose.yml up -d
+        docker-compose -f docker-compose.yml run --rm orders-tests-container
 
     - name: Shut down Docker Compose
       if: always()
