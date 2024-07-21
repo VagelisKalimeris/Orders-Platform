@@ -1,5 +1,5 @@
 ## Objective
-- Build an asynchronous RestApi that simulates an orders platform, supporting GET/POST/DELETE operations
+- Build an asynchronous RestApi that simulates an orders platform, supporting GET/POST/PATCH/DELETE operations
 - Implement WebSocket support - Notify all subscribed clients about the order execution status
 - Build an automated test suite, covering all endpoints - generate report
 - Implement performance testing - Place 100 concurrent orders, validate api responses, calculate average 
@@ -34,10 +34,11 @@ This affects load testing, since other concurrent tests slow down server, and ca
 
 ## Todo
 - [ ] Add CI actions
-- [ ] Change DELETE to PATCH
+- [ ] Move DELETE order logic to PATCH - Update DELETE logic
 - [ ] Test Websocket clients order status receival
 - [ ] Load test Websocket
-- [ ] Replace in memory DB with async postgres
+- [ ] Replace current thread initiation, with thread pool or multiprocessing for order status updates
+- [ ] Replace in memory DB with async **Postgres**
 
 
 [swagger]: http://0.0.0.0:80/docs
