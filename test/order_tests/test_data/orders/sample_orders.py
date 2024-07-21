@@ -3,7 +3,7 @@ from test.order_tests.test_data.orders.order_test_model import Order
 sample_orders = [
     Order('banana', 35),
     Order('pear', 15),
-    Order('chery', 5),
+    Order('cherry', 5),
     Order('kiwi', 1)
 ]
 
