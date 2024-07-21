@@ -13,10 +13,9 @@ def customize_openapi_schema():
     Updates OpenAPI documentation details for SWAGGER UI.
     """
     openapi_schema = get_openapi(
-        title='Forex Trading Platform API',
+        title='Orders API',
         version='1.0.0',
-        description='A RESTful API to simulate a Forex trading platform with WebSocket support for real-time order '
-                    'updates.',
+        description='RestApi simulates an orders platform, providing real-time updates to connected WebSocket clients.',
         servers=[
             {
                 'url': 'http://0.0.0.0:80'
