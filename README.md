@@ -1,5 +1,10 @@
 ## Objective
-See instructions [here][instructions].
+- Build an asynchronous RestApi that simulates an orders platform, supporting GET/POST/DELETE operations
+- Implement WebSocket support - Notify all subscribed clients about the order execution status
+- Build an automated test suite, covering all endpoints - generate report
+- Implement performance testing - Place 100 concurrent orders, validate api responses, calculate average 
+  execution time and standard deviation
+- Dockerize the tests and server in separate containers
 
 
 ## Swagger
@@ -27,7 +32,14 @@ This affects load testing, since other concurrent tests slow down server, and ca
 `-n=3` to `-n=1` in test [dockerfile][test dockerfile].
 
 
-[instructions]: instructions.md
+## Todo
+- [ ] Add CI actions
+- [ ] Change DELETE to PATCH
+- [ ] Test Websocket clients order status receival
+- [ ] Load test Websocket
+- [ ] Replace in memory DB with async postgres
+
+
 [swagger]: http://0.0.0.0:80/docs
 [test report]: test/test_reports/report.htm
 [test dockerfile]: test/Dockerfile
