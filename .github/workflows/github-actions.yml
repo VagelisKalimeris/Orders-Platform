@@ -34,7 +34,7 @@ jobs:
 
     - name: Run tests
       run: |
-        docker-compose -f docker-compose.yml run --rm test
+        docker-compose -f docker-compose.yml run --rm orders-tests-container
 
     - name: Shut down Docker Compose
       if: always()
