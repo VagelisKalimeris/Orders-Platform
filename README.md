@@ -33,7 +33,7 @@ This affects load testing, since other concurrent tests slow down server, and ca
 
 
 ## Todo
-- [ ] Add CI actions
+- [x] Add CI actions
 - [ ] Move DELETE order logic to PATCH - Update DELETE logic
 - [ ] Test Websocket clients order status receival
 - [ ] Load test Websocket
