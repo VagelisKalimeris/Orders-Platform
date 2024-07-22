@@ -1,4 +1,4 @@
-name: CI
+name: Build & Test Orders
 
 on: [push, workflow_dispatch]
 
