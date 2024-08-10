@@ -1,5 +1,5 @@
 ## Objective
-- Simulate an orders platform asynchronous RestApi that supports CRUD operations
+- Simulate an orders platform asynchronous RestApi
 - Notify all subscribed clients about the order execution status, using WebSocket
 - Build automated test suite covering all endpoints and generating results report
 - Implement performance testing with concurrent orders, validating api responses and  calculating average 
