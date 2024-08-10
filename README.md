@@ -1,8 +1,8 @@
 ## Objective
-- Build an asynchronous RestApi that simulates an orders platform, supporting CRUD operations
-- Implement WebSocket support - Notify all subscribed clients about the order execution status
-- Build an automated test suite, covering all endpoints - generate report
-- Implement performance testing - Place 100 concurrent orders, validate api responses, calculate average 
+- Simulate an orders platform asynchronous RestApi that supports CRUD operations
+- Notify all subscribed clients about the order execution status, using WebSocket
+- Build automated test suite covering all endpoints and generating results report
+- Implement performance testing with concurrent orders, validating api responses and  calculating average 
   execution time and standard deviation
 - Dockerize the tests and server in separate containers
 
@@ -17,7 +17,6 @@ Running `docker-compose up` will:
 - Create test container
 - Execute all tests in test container
 - Produce test report [here][test report]
-- Keep both containers running for any debugging or re-running of tests
 
 
 ## Design
