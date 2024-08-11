@@ -36,7 +36,7 @@ This affects load testing, since other concurrent tests slow down server, and ca
 - [ ] Move DELETE order logic to PATCH - Update DELETE logic
 - [ ] Test Websocket clients order status receival
 - [ ] Load test Websocket
-- [ ] Replace current thread initiation, with thread pool or multiprocessing for order status updates
+- [ ] Replace current thread implementation, with process pool for order status updates
 - [ ] Replace in memory DB with async **Postgres**
 
 
