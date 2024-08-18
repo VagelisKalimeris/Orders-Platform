@@ -13,7 +13,7 @@ Run server and visit [this page][swagger].
 
 ## Execution
 Running `docker-compose up` will:
-- Create and run api server container
+- Create api container and run server 
 - Create test container and execute all tests
 - Produce test report [here][test report]
 
