@@ -14,6 +14,6 @@ class Order:
     """
     Sample order model.
     """
-    def __init__(self, stocks: str, quantity: float):
-        self.stoks = stocks
+    def __init__(self, item: str, quantity: int):
+        self.item = item
         self.quantity = quantity

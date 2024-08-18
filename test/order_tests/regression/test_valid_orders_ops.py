@@ -20,7 +20,7 @@ class TestOrdersOps:
         post_resp = orders_test_client.post('/orders', order.__dict__)
 
         new_order_id = assert_that(post_resp, readable_json(post_resp)) \
-            .has_stoks(order.stoks) \
+            .has_item(order.item) \
             .has_quantity(order.quantity) \
             .has_status(OrderStatus.pending.value) \
             .extract_key('id') \
@@ -42,7 +42,7 @@ class TestOrdersOps:
         get_resp = orders_test_client.get(f'/orders/{sample_order_ids[order_num]}')
 
         assert_that(get_resp, readable_json(get_resp)) \
-            .has_stoks(sample_orders[order_num].stoks) \
+            .has_item(sample_orders[order_num].item) \
             .has_quantity(sample_orders[order_num].quantity)
 
     @mark.parametrize('order_num', orders_to_delete)
@@ -57,3 +57,11 @@ class TestOrdersOps:
 
         assert_that(get_resp, readable_json(get_resp)) \
             .has_status(OrderStatus.canceled.value)
+
+    def test_retrieve_all_cancelled_orders(self, orders_test_client):
+        # Make api call, verify status
+        get_resp = orders_test_client.get('/orders?status=canceled')
+
+        assert_that(get_resp, readable_json(get_resp)) \
+            .extracting('id') \
+            .is_equal_to([sample_order_ids[pos] for pos in orders_to_delete])
