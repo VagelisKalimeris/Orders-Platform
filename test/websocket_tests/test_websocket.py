@@ -1,13 +1,20 @@
+from assertpy import assert_that
+from pytest import mark
+from websockets import connect
 
-from httpx_ws import connect_ws
+from test.order_tests.test_data.orders.sample_orders import sample_orders
 
-"""
-A main purely for debugging.
-"""
 
-if __name__ == '__main__':
+@mark.asyncio
+@mark.parametrize('order', sample_orders)
+async def test_websocket_connection(orders_test_client, order):
 
-    with connect_ws("http://0.0.0.0:80/ws") as ws:
-        while True:
-            message = ws.receive_text()
-            print(message)
+    async with connect('ws://0.0.0.0:80/ws') as websocket:
+        # Make api call, verify status
+        orders_test_client.post('/orders', order.__dict__)
+
+        # Receive websocket response
+        response = await websocket.recv()
+
+        # Verify websocket response
+        assert_that(response)
