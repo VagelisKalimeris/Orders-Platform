@@ -40,5 +40,5 @@ This affects load testing, since other concurrent tests slow down server, and ca
 
 
 [swagger]: http://0.0.0.0:80/docs
-[test report]: test/test_reports/report.htm
+[test report]: test/test_reports/report.html
 [test dockerfile]: test/Dockerfile

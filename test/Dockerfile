@@ -14,4 +14,4 @@ COPY . /Test-Orders/test
 
 
 # Run tests and stay alive for debugging or reruns
-CMD ["/bin/bash","-c","sleep 3; pytest -vs -n=3 --dist=loadfile --html=/test/test_reports/report.htm;"]
+CMD ["/bin/bash","-c","sleep 3; pytest -vs -n=3 --dist=loadfile --html=/test/test_reports/report.html;"]
