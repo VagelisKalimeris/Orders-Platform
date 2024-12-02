@@ -15,9 +15,6 @@ jobs:
         sudo curl -L "https://github.com/docker/compose/releases/download/v2.0.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
 
-    - name: Build Docker Compose
-      run: docker-compose build
-
     - name: Install Python
       uses: actions/setup-python@v4
       with:
